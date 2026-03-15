@@ -2,7 +2,7 @@ CREATE SCHEMA IF NOT EXISTS espacoautoestima;
 USE espacoautoestima;
 
 CREATE TABLE IF NOT EXISTS accounts(
-    id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    accounts_id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     user_name VARCHAR(50),
     phoneNumber VARCHAR(25),
     email VARCHAR(40),
@@ -10,49 +10,51 @@ CREATE TABLE IF NOT EXISTS accounts(
 );
 
 CREATE TABLE IF NOT EXISTS customers(
-    id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    customers_id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(45),
     phoneNumber VARCHAR(25),
     email VARCHAR(40),
-    cpf VARCHAR(25)
+    cpf VARCHAR(14)
 );
 
 CREATE TABLE IF NOT EXISTS professionals(
-    id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    professionals_id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(45),
     phoneNumber VARCHAR(25),
+    email VARCHAR(40),
     speciality VARCHAR(20)
 );
 
 CREATE TABLE IF NOT EXISTS procedures(
-    id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    procedures_id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(45),
     description VARCHAR(100)
 );
 
-CREATE TABLE IF NOT EXISTS schedule(
-    id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    customerName VARCHAR(30),
-    professionalName VARCHAR(30),
+CREATE TABLE IF NOT EXISTS schedules(
+    schedule_id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    customerName VARCHAR(45),
+    professionalName VARCHAR(45),
     sessionQuantity BIGINT,
     dateSchedule date,
     hourSchedule time,
     customers_id BIGINT,
     professionals_id BIGINT,
-    FOREIGN KEY (customers_id) REFERENCES customers(id),
-    FOREIGN KEY (professionals_id) REFERENCES professionals(id)
+    FOREIGN KEY (customers_id) REFERENCES customers(customers_id),
+    FOREIGN KEY (professionals_id) REFERENCES professionals(professionals_id)
 );
 
 CREATE TABLE IF NOT EXISTS disponibility(
-    id_disponibility BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    disponibility_id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     dayDisponibility date,
-    hourDisponibility time,
+    hourStart time,
+    hourEnd time,
     professionals_id BIGINT,
-    FOREIGN KEY (professionals_id) REFERENCES professionals(id)
+    FOREIGN KEY (professionals_id) REFERENCES professionals(professionals_id)
 );
 
 CREATE TABLE IF NOT EXISTS products(
-    id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    products_id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(45),
     expirationDate date,
     quantity INT,
@@ -62,7 +64,7 @@ CREATE TABLE IF NOT EXISTS products(
 );
 
 CREATE TABLE IF NOT EXISTS suppliers(
-    id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    suppliers_id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(45),
     email VARCHAR(40),
     phoneNumber VARCHAR(20),
