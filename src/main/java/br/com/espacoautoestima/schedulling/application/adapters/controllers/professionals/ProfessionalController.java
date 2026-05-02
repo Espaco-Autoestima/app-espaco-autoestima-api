@@ -1,10 +1,15 @@
-package br.com.espacoautoestima.schedulling.application.controllers.professionals;
+package br.com.espacoautoestima.schedulling.application.adapters.controllers.professionals;
 
+import br.com.espacoautoestima.schedulling.application.services.professionals.ProfessionalService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/v1/professionals")
-public class ProfessionalsController {
+public class ProfessionalController {
+
+    @Autowired
+    private ProfessionalService professionalService;
 
     // Use 200 status code for successful retrieval of resources
     @GetMapping

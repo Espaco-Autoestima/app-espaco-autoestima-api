@@ -1,10 +1,15 @@
-package br.com.espacoautoestima.schedulling.application.controllers.customers;
+package br.com.espacoautoestima.schedulling.application.adapters.controllers.customers;
 
+import br.com.espacoautoestima.schedulling.application.services.customers.CustomerService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/v1/customers")
-public class CustomersController {
+public class CustomerController {
+
+    @Autowired
+    private CustomerService customerService;
 
     // Use 200 status code for successful retrieval of resources
     @GetMapping

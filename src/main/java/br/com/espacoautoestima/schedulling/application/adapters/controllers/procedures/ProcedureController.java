@@ -1,10 +1,15 @@
-package br.com.espacoautoestima.schedulling.application.controllers.procedures;
+package br.com.espacoautoestima.schedulling.application.adapters.controllers.procedures;
 
+import br.com.espacoautoestima.schedulling.application.services.procedures.ProcedureService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/v1/procedures")
-public class ProceduresController {
+public class ProcedureController {
+
+    @Autowired
+    private ProcedureService procedureService;
 
     // Use 200 status code for successful retrieval of resources
     @GetMapping

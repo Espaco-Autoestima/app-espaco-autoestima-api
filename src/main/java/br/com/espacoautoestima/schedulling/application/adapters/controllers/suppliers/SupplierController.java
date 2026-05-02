@@ -1,10 +1,15 @@
-package br.com.espacoautoestima.schedulling.application.controllers.suppliers;
+package br.com.espacoautoestima.schedulling.application.adapters.controllers.suppliers;
 
+import br.com.espacoautoestima.schedulling.application.services.suppliers.SupplierService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/v1/suppliers")
-public class SuppliersController {
+public class SupplierController {
+
+    @Autowired
+    private SupplierService supplierService;
 
     // Use 200 status code for successful retrieval of resources
     @GetMapping

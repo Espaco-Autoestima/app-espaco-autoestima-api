@@ -1,10 +1,15 @@
-package br.com.espacoautoestima.schedulling.application.controllers.schedules;
+package br.com.espacoautoestima.schedulling.application.adapters.controllers.schedules;
 
+import br.com.espacoautoestima.schedulling.application.services.schedules.ScheduleService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/v1/schedules")
 public class ScheduleController {
+
+    @Autowired
+    private ScheduleService scheduleService;
 
     // Use 200 status code for successful retrieval of resources
     @GetMapping
