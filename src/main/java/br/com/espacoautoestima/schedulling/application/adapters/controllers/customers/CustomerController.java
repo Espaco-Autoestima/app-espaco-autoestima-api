@@ -1,8 +1,14 @@
 package br.com.espacoautoestima.schedulling.application.adapters.controllers.customers;
 
+import br.com.espacoautoestima.schedulling.application.adapters.dto.CustomerDTORequest;
+import br.com.espacoautoestima.schedulling.application.model.entities.CustomerEntity;
 import br.com.espacoautoestima.schedulling.application.services.customers.CustomerService;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/v1/customers")
@@ -11,16 +17,16 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
-    // Use 200 status code for successful retrieval of resources
+    // Reformulate the endpoint to follow RESTful conventions and return a list of customers
     @GetMapping
-    public String listCustomers() {
-        return "List of customers";
+    public List<CustomerEntity> listCustomers() {
+        return customerService.getAllCustomers();
     }
 
-    // Use 201 status code for successful creation of a resource
     @PostMapping
-    public String createCustomer() {
-        return "Customer created";
+    public ResponseEntity<String> createCustomer(@NotNull @RequestBody CustomerDTORequest customer) {
+        customerService.createCustomer(new CustomerEntity(null, customer.getName(), customer.getEmail(), customer.getPhoneNumber(), customer.getCpf()));
+        return ResponseEntity.status(201).body("Customer created");
     }
 
     // Use 204 status code for successful deletion of a resource
