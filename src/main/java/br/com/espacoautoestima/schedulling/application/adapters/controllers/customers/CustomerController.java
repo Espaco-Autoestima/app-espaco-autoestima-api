@@ -29,15 +29,15 @@ public class CustomerController {
         return ResponseEntity.status(201).body("Customer created");
     }
 
-    // Use 204 status code for successful deletion of a resource
-    @PutMapping
-    public String updateCustomer() {
-        return "Customer updated";
+    @PatchMapping("/{idCustomer}")
+    public ResponseEntity<String> updateCustomer(@PathVariable Long idCustomer, @NotNull @RequestBody CustomerDTORequest customer) {
+        customerService.updateCustomer(new CustomerEntity(idCustomer, customer.getName(), customer.getEmail(), customer.getPhoneNumber(), customer.getCpf()));
+        return ResponseEntity.status(204).body("Customer updated");
     }
 
-    // Use 204 status code for successful deletion of a resource
-    @DeleteMapping
-    public String deleteCustomer() {
-        return "Customer deleted";
+    @DeleteMapping("/{idCustomer}")
+    public ResponseEntity<String> deleteCustomer(@PathVariable Long idCustomer) {
+        customerService.deleteCustomer(idCustomer);
+        return ResponseEntity.status(204).body("Customer deleted");
     }
 }
