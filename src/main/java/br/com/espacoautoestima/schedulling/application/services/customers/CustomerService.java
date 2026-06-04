@@ -18,6 +18,14 @@ public class CustomerService {
         return customerRepository.findAll();
     }
 
+    public CustomerEntity getCustomerById(Long idCustomer) {
+        return customerRepository.findById(idCustomer).orElseThrow(() -> new RuntimeException("Customer not found for search"));
+    }
+
+    public List<CustomerEntity> getCustomerByName(String name) {
+        return customerRepository.findByName(name);
+    }
+
     @Transactional
     public CustomerEntity createCustomer(CustomerEntity customer) {
         return customerRepository.save(customer);
@@ -26,7 +34,7 @@ public class CustomerService {
     @Transactional
     public CustomerEntity updateCustomer(CustomerEntity customer) {
         CustomerEntity existingCustomer = customerRepository.findById(
-                customer.getId()).orElseThrow(() -> new RuntimeException("Customer not found"));
+                customer.getId()).orElseThrow(() -> new RuntimeException("Customer not found for update"));
         existingCustomer.setName(customer.getName());
         existingCustomer.setEmail(customer.getEmail());
         existingCustomer.setPhoneNumber(customer.getPhoneNumber());
@@ -37,7 +45,7 @@ public class CustomerService {
     @Transactional
     public CustomerEntity deleteCustomer(Long idCustomer) {
         CustomerEntity customer = customerRepository.findById(
-                idCustomer).orElseThrow(() -> new RuntimeException("Customer not found"));
+                idCustomer).orElseThrow(() -> new RuntimeException("Customer not found for delete"));
         customerRepository.delete(customer);
         return customer;
     }

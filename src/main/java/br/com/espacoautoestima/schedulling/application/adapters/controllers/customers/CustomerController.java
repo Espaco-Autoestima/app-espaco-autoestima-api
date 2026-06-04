@@ -23,6 +23,18 @@ public class CustomerController {
         return customerService.getAllCustomers();
     }
 
+    @GetMapping("/{idCustomer}")
+    public ResponseEntity<CustomerEntity> getCustomerById(@PathVariable Long idCustomer) {
+        CustomerEntity customer = customerService.getCustomerById(idCustomer);
+        return ResponseEntity.status(200).body(customer);
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<CustomerEntity>> getCustomerByName(@RequestParam String name) {
+        List<CustomerEntity> customers = customerService.getCustomerByName(name);
+        return ResponseEntity.status(200).body(customers);
+    }
+
     @PostMapping
     public ResponseEntity<String> createCustomer(@NotNull @RequestBody CustomerDTORequest customer) {
         customerService.createCustomer(new CustomerEntity(null, customer.getName(), customer.getEmail(), customer.getPhoneNumber(), customer.getCpf()));
