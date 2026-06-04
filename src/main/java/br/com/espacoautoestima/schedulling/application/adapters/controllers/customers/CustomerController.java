@@ -4,7 +4,6 @@ import br.com.espacoautoestima.schedulling.application.adapters.dto.CustomerDTOR
 import br.com.espacoautoestima.schedulling.application.model.entities.CustomerEntity;
 import br.com.espacoautoestima.schedulling.application.services.customers.CustomerService;
 import jakarta.validation.constraints.NotNull;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,10 +13,13 @@ import java.util.List;
 @RequestMapping("/v1/customers")
 public class CustomerController {
 
-    @Autowired
-    private CustomerService customerService;
+    private final CustomerService customerService;
 
-    // Reformulate the endpoint to follow RESTful conventions and return a list of customers
+    public CustomerController(CustomerService customerService) {
+        this.customerService = customerService;
+    }
+
+    // Reformulate the endpoint to follow RESTful conventions and return a list of customers based on DTO response class
     @GetMapping
     public List<CustomerEntity> listCustomers() {
         return customerService.getAllCustomers();
@@ -41,7 +43,7 @@ public class CustomerController {
         return ResponseEntity.status(201).body("Customer created");
     }
 
-    @PatchMapping("/{idCustomer}")
+    @PutMapping("/{idCustomer}")
     public ResponseEntity<String> updateCustomer(@PathVariable Long idCustomer, @NotNull @RequestBody CustomerDTORequest customer) {
         customerService.updateCustomer(new CustomerEntity(idCustomer, customer.getName(), customer.getEmail(), customer.getPhoneNumber(), customer.getCpf()));
         return ResponseEntity.status(204).body("Customer updated");
