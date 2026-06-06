@@ -19,12 +19,13 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    // Reformulate the endpoint to follow RESTful conventions and return a list of customers based on DTO response class
     @GetMapping
-    public List<CustomerEntity> listCustomers() {
-        return customerService.getAllCustomers();
+    public ResponseEntity<List<CustomerEntity>> listCustomers() {
+        List<CustomerEntity> customers = customerService.getAllCustomers();
+        return ResponseEntity.status(200).body(customers);
     }
 
+    // Analyze if is necessary to return a list of customers
     @GetMapping("/{idCustomer}")
     public ResponseEntity<CustomerEntity> getCustomerById(@PathVariable Long idCustomer) {
         CustomerEntity customer = customerService.getCustomerById(idCustomer);
@@ -38,20 +39,20 @@ public class CustomerController {
     }
 
     @PostMapping
-    public ResponseEntity<String> createCustomer(@NotNull @RequestBody CustomerDTORequest customer) {
+    public ResponseEntity<Void> createCustomer(@NotNull @RequestBody CustomerDTORequest customer) {
         customerService.createCustomer(new CustomerEntity(null, customer.getName(), customer.getEmail(), customer.getPhoneNumber(), customer.getCpf()));
-        return ResponseEntity.status(201).body("Customer created");
+        return ResponseEntity.status(201).build();
     }
 
     @PutMapping("/{idCustomer}")
-    public ResponseEntity<String> updateCustomer(@PathVariable Long idCustomer, @NotNull @RequestBody CustomerDTORequest customer) {
+    public ResponseEntity<Void> updateCustomer(@PathVariable Long idCustomer, @NotNull @RequestBody CustomerDTORequest customer) {
         customerService.updateCustomer(new CustomerEntity(idCustomer, customer.getName(), customer.getEmail(), customer.getPhoneNumber(), customer.getCpf()));
-        return ResponseEntity.status(204).body("Customer updated");
+        return ResponseEntity.status(204).build();
     }
 
     @DeleteMapping("/{idCustomer}")
-    public ResponseEntity<String> deleteCustomer(@PathVariable Long idCustomer) {
+    public ResponseEntity<Void> deleteCustomer(@PathVariable Long idCustomer) {
         customerService.deleteCustomer(idCustomer);
-        return ResponseEntity.status(204).body("Customer deleted");
+        return ResponseEntity.status(204).build();
     }
 }
