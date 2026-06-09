@@ -4,11 +4,9 @@ on:
   push:
     branches:
       - feature/initial-config
-      - main
   pull_request:
     branches:
       - feature/initial-config
-      - main
 
 jobs:
   build:
