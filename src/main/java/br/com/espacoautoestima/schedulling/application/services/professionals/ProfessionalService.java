@@ -1,6 +1,6 @@
 package br.com.espacoautoestima.schedulling.application.services.professionals;
 
-import br.com.espacoautoestima.schedulling.application.repositories.ProfessionalRepository;
+import br.com.espacoautoestima.schedulling.application.infrastructure.repositories.ProfessionalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,7 @@
 package br.com.espacoautoestima.schedulling.application.adapters.controllers.customers;
 
 import br.com.espacoautoestima.schedulling.application.adapters.dto.CustomerDTORequest;
+import br.com.espacoautoestima.schedulling.application.adapters.dto.CustomerDTOResponse;
 import br.com.espacoautoestima.schedulling.application.model.entities.CustomerEntity;
 import br.com.espacoautoestima.schedulling.application.services.customers.CustomerService;
 import jakarta.validation.constraints.NotNull;
@@ -20,8 +21,8 @@ public class CustomerController {
     }
 
     @GetMapping
-    public ResponseEntity<List<CustomerEntity>> listCustomers() {
-        List<CustomerEntity> customers = customerService.getAllCustomers();
+    public ResponseEntity<List<CustomerDTOResponse>> listCustomers() {
+        List<CustomerDTOResponse> customers = customerService.getAllCustomers();
         return ResponseEntity.status(200).body(customers);
     }
 
@@ -44,7 +45,7 @@ public class CustomerController {
         return ResponseEntity.status(201).build();
     }
 
-    @PutMapping("/{idCustomer}")
+    @PatchMapping("/{idCustomer}")
     public ResponseEntity<Void> updateCustomer(@PathVariable Long idCustomer, @NotNull @RequestBody CustomerDTORequest customer) {
         customerService.updateCustomer(new CustomerEntity(idCustomer, customer.getName(), customer.getEmail(), customer.getPhoneNumber(), customer.getCpf()));
         return ResponseEntity.status(204).build();

@@ -1,7 +1,8 @@
 package br.com.espacoautoestima.schedulling.application.services.customers;
 
+import br.com.espacoautoestima.schedulling.application.adapters.dto.CustomerDTOResponse;
 import br.com.espacoautoestima.schedulling.application.model.entities.CustomerEntity;
-import br.com.espacoautoestima.schedulling.application.repositories.CustomerRepository;
+import br.com.espacoautoestima.schedulling.application.infrastructure.repositories.CustomerRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +17,16 @@ public class CustomerService {
         this.customerRepository = customerRepository;
     }
 
-    public List<CustomerEntity> getAllCustomers() {
-        return customerRepository.findAll();
+    public List<CustomerDTOResponse> getAllCustomers() {
+        List<CustomerEntity> customersEntity = customerRepository.findAll();
+        return customersEntity.stream()
+                .map(customer -> new CustomerDTOResponse(
+                        customer.getId(),
+                        customer.getName(),
+                        customer.getEmail(),
+                        customer.getPhoneNumber(),
+                        customer.getCpf()
+                )).toList();
     }
 
     public CustomerEntity getCustomerById(Long idCustomer) {
