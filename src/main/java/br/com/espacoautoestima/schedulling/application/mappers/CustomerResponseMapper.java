@@ -23,7 +23,7 @@ public interface CustomerResponseMapper {
     @Mapping(target = "cpf", source = "customerEntity.cpf")
     public abstract Customer toDomain(CustomerEntity customerEntity);
 
-    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "id", source = "customerEntity.id")
     @Mapping(target = "name", source = "customerEntity.name")
     @Mapping(target = "email", source = "customerEntity.email")
     @Mapping(target = "phoneNumber", source = "customerEntity.phoneNumber")

@@ -22,7 +22,7 @@ public interface CustomerRequestMapper {
     @Mapping(target = "cpf", source = "customerDTORequest.cpf")
     public abstract Customer toDomain(CustomerDTORequest customerDTORequest);
 
-    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "id", source = "id")
     @Mapping(target = "name", source = "name")
     @Mapping(target = "email", source = "email")
     @Mapping(target = "phoneNumber", source = "phoneNumber")

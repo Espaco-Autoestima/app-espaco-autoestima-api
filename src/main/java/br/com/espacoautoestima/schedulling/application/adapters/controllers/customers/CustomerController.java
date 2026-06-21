@@ -26,16 +26,15 @@ public class CustomerController {
         return ResponseEntity.status(200).body(customers);
     }
 
-    // To analyze if is necessary to return a list of customers
     @GetMapping("/{idCustomer}")
-    public ResponseEntity<CustomerEntity> getCustomerById(@PathVariable Long idCustomer) {
-        CustomerEntity customer = customerService.getCustomerById(idCustomer);
+    public ResponseEntity<CustomerDTOResponse> getCustomerById(@PathVariable Long idCustomer) {
+        CustomerDTOResponse customer = customerService.getCustomerById(idCustomer);
         return ResponseEntity.status(200).body(customer);
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<CustomerEntity>> getCustomerByName(@RequestParam String name) {
-        List<CustomerEntity> customers = customerService.getCustomerByName(name);
+    public ResponseEntity<List<CustomerDTOResponse>> getCustomerByName(@RequestParam String name) {
+        List<CustomerDTOResponse> customers = customerService.getCustomerByName(name);
         return ResponseEntity.status(200).body(customers);
     }
 
@@ -47,7 +46,7 @@ public class CustomerController {
 
     @PatchMapping("/{idCustomer}")
     public ResponseEntity<Void> updateCustomer(@PathVariable Long idCustomer, @NotNull @RequestBody CustomerDTORequest customer) {
-        customerService.updateCustomer(new CustomerEntity(idCustomer, customer.getName(), customer.getEmail(), customer.getPhoneNumber(), customer.getCpf()));
+        customerService.updateCustomer(idCustomer, customer);
         return ResponseEntity.status(204).build();
     }
 
