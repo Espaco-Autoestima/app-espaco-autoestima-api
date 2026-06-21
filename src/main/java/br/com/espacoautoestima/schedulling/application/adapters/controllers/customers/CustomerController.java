@@ -26,7 +26,7 @@ public class CustomerController {
         return ResponseEntity.status(200).body(customers);
     }
 
-    // Analyze if is necessary to return a list of customers
+    // To analyze if is necessary to return a list of customers
     @GetMapping("/{idCustomer}")
     public ResponseEntity<CustomerEntity> getCustomerById(@PathVariable Long idCustomer) {
         CustomerEntity customer = customerService.getCustomerById(idCustomer);
@@ -41,7 +41,7 @@ public class CustomerController {
 
     @PostMapping
     public ResponseEntity<Void> createCustomer(@NotNull @RequestBody CustomerDTORequest customer) {
-        customerService.createCustomer(new CustomerEntity(null, customer.getName(), customer.getEmail(), customer.getPhoneNumber(), customer.getCpf()));
+        customerService.createCustomer(customer);
         return ResponseEntity.status(201).build();
     }
 

@@ -1,6 +1,8 @@
 package br.com.espacoautoestima.schedulling.application.services.customers;
 
+import br.com.espacoautoestima.schedulling.application.adapters.dto.CustomerDTORequest;
 import br.com.espacoautoestima.schedulling.application.adapters.dto.CustomerDTOResponse;
+import br.com.espacoautoestima.schedulling.application.mappers.CustomerRequestMapper;
 import br.com.espacoautoestima.schedulling.application.model.entities.CustomerEntity;
 import br.com.espacoautoestima.schedulling.application.infrastructure.repositories.CustomerRepository;
 import jakarta.transaction.Transactional;
@@ -12,9 +14,11 @@ import java.util.List;
 public class CustomerService {
 
     private final CustomerRepository customerRepository;
+    private final CustomerRequestMapper customerRequestMapper;
 
-    public CustomerService(CustomerRepository customerRepository) {
+    public CustomerService(CustomerRepository customerRepository, CustomerRequestMapper customerRequestMapper) {
         this.customerRepository = customerRepository;
+        this.customerRequestMapper = customerRequestMapper;
     }
 
     public List<CustomerDTOResponse> getAllCustomers() {
@@ -40,8 +44,9 @@ public class CustomerService {
     }
 
     @Transactional
-    public CustomerEntity createCustomer(CustomerEntity customer) {
-        return customerRepository.save(customer);
+    public void createCustomer(CustomerDTORequest customer) {
+        CustomerEntity customerEntity = customerRequestMapper.toEntity(customer);
+        customerRepository.save(customerEntity);
     }
 
     @Transactional
@@ -57,11 +62,10 @@ public class CustomerService {
     }
 
     @Transactional
-    public CustomerEntity deleteCustomer(Long idCustomer) {
+    public void deleteCustomer(Long idCustomer) {
         CustomerEntity customer = customerRepository
                 .findById(idCustomer)
                 .orElseThrow(() -> new RuntimeException("Customer not found for delete"));
         customerRepository.delete(customer);
-        return customer;
     }
 }
