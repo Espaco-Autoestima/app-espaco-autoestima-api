@@ -16,11 +16,11 @@ public interface CustomerRequestMapper {
     public abstract CustomerEntity toEntity(CustomerDTORequest customerDTORequest);
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "name", source = "customerDTORequest.name")
-    @Mapping(target = "email", source = "customerDTORequest.email")
-    @Mapping(target = "phoneNumber", source = "customerDTORequest.phoneNumber")
-    @Mapping(target = "cpf", source = "customerDTORequest.cpf")
-    public abstract Customer toDomain(CustomerDTORequest customerDTORequest);
+    @Mapping(target = "name", source = "name")
+    @Mapping(target = "email", source = "email")
+    @Mapping(target = "phoneNumber", source = "phoneNumber")
+    @Mapping(target = "cpf", source = "cpf")
+    public abstract Customer toDomain(CustomerEntity customerEntity);
 
     @Mapping(target = "id", source = "id")
     @Mapping(target = "name", source = "name")

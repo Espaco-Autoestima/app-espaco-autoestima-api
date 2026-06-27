@@ -6,7 +6,6 @@ import br.com.espacoautoestima.schedulling.core.domain.Customer;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-// Check if is necessary includes 'uses' for other mappers
 @Mapper(componentModel = "spring")
 public interface CustomerResponseMapper {
     @Mapping(target = "id", ignore = true)
