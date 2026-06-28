@@ -1,10 +1,12 @@
 package br.com.espacoautoestima.schedulling.application.services.procedures;
 
+import br.com.espacoautoestima.schedulling.application.adapters.dto.ProcedureDTORequest;
 import br.com.espacoautoestima.schedulling.application.adapters.dto.ProcedureDTOResponse;
 import br.com.espacoautoestima.schedulling.application.infrastructure.repositories.ProcedureRepository;
 import br.com.espacoautoestima.schedulling.application.mappers.ProcedureRequestMapper;
 import br.com.espacoautoestima.schedulling.application.mappers.ProcedureResponseMapper;
 import br.com.espacoautoestima.schedulling.application.model.entities.ProcedureEntity;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -41,5 +43,11 @@ public class ProcedureService {
         return proceduresEntity.stream()
                 .map(procedureResponseMapper::toDtoResponse)
                 .toList();
+    }
+
+    @Transactional
+    public void createProcedure(ProcedureDTORequest procedure) {
+        ProcedureEntity procedureEntity = procedureRequestMapper.toEntity(procedure);
+        procedureRepository.save(procedureEntity);
     }
 }

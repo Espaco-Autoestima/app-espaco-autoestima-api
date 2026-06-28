@@ -18,8 +18,8 @@ public interface ProcedureRequestMapper {
     @Mapping(target = "description", source = "description")
     public abstract Procedure toDomain(ProcedureEntity procedureEntity);
 
-    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "id", source = "id")
     @Mapping(target = "name", source = "name")
     @Mapping(target = "description", source = "description")
-    public abstract ProcedureDTORequest toDtoRequest(ProcedureEntity procedureEntity);
+    public abstract ProcedureDTORequest toDtoRequest(Procedure procedure);
 }
