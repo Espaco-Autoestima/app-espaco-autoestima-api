@@ -27,7 +27,7 @@ public class CustomerService {
     public List<CustomerDTOResponse> getAllCustomers() {
         List<CustomerEntity> customersEntity = customerRepository.findAll();
         return customersEntity.stream()
-                .map(customer -> customerResponseMapper.toDtoResponse(customer))
+                .map(customerResponseMapper::toDtoResponse)
                 .toList();
     }
 
@@ -41,7 +41,7 @@ public class CustomerService {
     public List<CustomerDTOResponse> getCustomerByName(String name) {
         List<CustomerEntity> customersEntity = customerRepository.findByName(name);
         return customersEntity.stream()
-                .map(customer -> customerResponseMapper.toDtoResponse(customer))
+                .map(customerResponseMapper::toDtoResponse)
                 .toList();
     }
 
