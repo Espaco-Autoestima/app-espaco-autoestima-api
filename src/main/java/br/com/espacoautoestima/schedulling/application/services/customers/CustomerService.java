@@ -47,8 +47,8 @@ public class CustomerService {
 
     @Transactional
     public void createCustomer(CustomerDTORequest customer) {
-        CustomerEntity customerEntity = customerRequestMapper.toEntity(customer);
-        customerRepository.save(customerEntity);
+        CustomerEntity newCustomer = customerRequestMapper.saveEntityFromDto(customer);
+        customerRepository.save(newCustomer);
     }
 
     @Transactional
@@ -56,17 +56,16 @@ public class CustomerService {
         CustomerEntity existingCustomer = customerRepository.findById(idCustomer)
                 .orElseThrow(() -> new RuntimeException("Customer not found for update"));
 
-        CustomerEntity updatedCustomer = customerRequestMapper.toEntity(customer);
-        updatedCustomer.setId(existingCustomer.getId());
-
+        customerRequestMapper.updateEntityFromDto(customer, existingCustomer);
+        CustomerEntity updatedCustomer = existingCustomer;
         customerRepository.save(updatedCustomer);
     }
 
     @Transactional
     public void deleteCustomer(Long idCustomer) {
-        CustomerEntity customerEntity = customerRepository
+        CustomerEntity existingCustomer = customerRepository
                 .findById(idCustomer)
                 .orElseThrow(() -> new RuntimeException("Customer not found for delete"));
-        customerRepository.delete(customerEntity);
+        customerRepository.delete(existingCustomer);
     }
 }

@@ -47,7 +47,25 @@ public class ProcedureService {
 
     @Transactional
     public void createProcedure(ProcedureDTORequest procedure) {
-        ProcedureEntity procedureEntity = procedureRequestMapper.toEntity(procedure);
-        procedureRepository.save(procedureEntity);
+        ProcedureEntity newProcedure = procedureRequestMapper.saveEntityFromDto(procedure);
+        procedureRepository.save(newProcedure);
+    }
+
+    @Transactional
+    public void updateProcedure(Long idProcedure, ProcedureDTORequest procedure) {
+        ProcedureEntity existingProcedure = procedureRepository.findById(idProcedure)
+                .orElseThrow(() -> new RuntimeException("Procedure not found for update"));
+
+        procedureRequestMapper.updateEntityFromDto(procedure, existingProcedure);
+        ProcedureEntity updatedProcedure = existingProcedure;
+        procedureRepository.save(updatedProcedure);
+    }
+
+    @Transactional
+    public void deleteProcedure(Long idProcedure) {
+        ProcedureEntity existingProcedure = procedureRepository
+                .findById(idProcedure)
+                .orElseThrow(() -> new RuntimeException("Procedure not found for delete"));
+        procedureRepository.delete(existingProcedure);
     }
 }

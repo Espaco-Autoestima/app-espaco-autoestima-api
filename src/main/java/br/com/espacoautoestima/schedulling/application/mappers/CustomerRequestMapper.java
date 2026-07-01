@@ -5,17 +5,26 @@ import br.com.espacoautoestima.schedulling.application.model.entities.CustomerEn
 import br.com.espacoautoestima.schedulling.core.domain.Customer;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")
 public interface CustomerRequestMapper {
+
+    @Mapping(target = "id", source = "customerDTORequest.id")
+    @Mapping(target = "name", source = "customerDTORequest.name")
+    @Mapping(target = "email", source = "customerDTORequest.email")
+    @Mapping(target = "phoneNumber", source = "customerDTORequest.phoneNumber")
+    @Mapping(target = "cpf", source = "customerDTORequest.cpf")
+    public abstract CustomerEntity saveEntityFromDto(CustomerDTORequest customerDTORequest);
+
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "name", source = "customerDTORequest.name")
     @Mapping(target = "email", source = "customerDTORequest.email")
     @Mapping(target = "phoneNumber", source = "customerDTORequest.phoneNumber")
     @Mapping(target = "cpf", source = "customerDTORequest.cpf")
-    public abstract CustomerEntity toEntity(CustomerDTORequest customerDTORequest);
+    public abstract void updateEntityFromDto(CustomerDTORequest customerDTORequest, @MappingTarget CustomerEntity customerEntity);
 
-    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "id", source = "id")
     @Mapping(target = "name", source = "name")
     @Mapping(target = "email", source = "email")
     @Mapping(target = "phoneNumber", source = "phoneNumber")

@@ -43,13 +43,15 @@ public class ProcedureController {
         return ResponseEntity.status(201).build();
     }
 
-    @PutMapping
-    public String updateProcedure() {
-        return "Procedure updated";
+    @PatchMapping("/{idProcedure}")
+    public ResponseEntity<Void> updateProcedure(@PathVariable Long idProcedure, @NotNull @RequestBody ProcedureDTORequest procedure) {
+        procedureService.updateProcedure(idProcedure, procedure);
+        return ResponseEntity.status(200).build();
     }
 
-    @DeleteMapping
-    public String deleteProcedure() {
-        return "Procedure deleted";
+    @DeleteMapping("/{idProcedure}")
+    public ResponseEntity<Void> deleteProcedure(@PathVariable Long idProcedure) {
+        procedureService.deleteProcedure(idProcedure);
+        return ResponseEntity.status(200).build();
     }
 }
