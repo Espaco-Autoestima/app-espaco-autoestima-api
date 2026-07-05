@@ -46,12 +46,12 @@ public class ProcedureController {
     @PatchMapping("/{idProcedure}")
     public ResponseEntity<Void> updateProcedure(@PathVariable Long idProcedure, @NotNull @RequestBody ProcedureDTORequest procedure) {
         procedureService.updateProcedure(idProcedure, procedure);
-        return ResponseEntity.status(200).build();
+        return ResponseEntity.status(204).build();
     }
 
     @DeleteMapping("/{idProcedure}")
     public ResponseEntity<Void> deleteProcedure(@PathVariable Long idProcedure) {
         procedureService.deleteProcedure(idProcedure);
-        return ResponseEntity.status(200).build();
+        return ResponseEntity.status(204).build();
     }
 }

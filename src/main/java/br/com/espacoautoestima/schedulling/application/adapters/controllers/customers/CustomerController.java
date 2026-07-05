@@ -2,7 +2,6 @@ package br.com.espacoautoestima.schedulling.application.adapters.controllers.cus
 
 import br.com.espacoautoestima.schedulling.application.adapters.dto.CustomerDTORequest;
 import br.com.espacoautoestima.schedulling.application.adapters.dto.CustomerDTOResponse;
-import br.com.espacoautoestima.schedulling.application.model.entities.CustomerEntity;
 import br.com.espacoautoestima.schedulling.application.services.customers.CustomerService;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.http.ResponseEntity;
