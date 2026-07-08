@@ -1,4 +1,4 @@
-package br.com.espacoautoestima.schedulling.application.adapters.dto;
+package br.com.espacoautoestima.schedulling.application.adapters.dto.customer;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;

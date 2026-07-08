@@ -1,7 +1,7 @@
 package br.com.espacoautoestima.schedulling.application.adapters.controllers.customers;
 
-import br.com.espacoautoestima.schedulling.application.adapters.dto.CustomerDTORequest;
-import br.com.espacoautoestima.schedulling.application.adapters.dto.CustomerDTOResponse;
+import br.com.espacoautoestima.schedulling.application.adapters.dto.customer.CustomerDTORequest;
+import br.com.espacoautoestima.schedulling.application.adapters.dto.customer.CustomerDTOResponse;
 import br.com.espacoautoestima.schedulling.application.services.customers.CustomerService;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.http.ResponseEntity;
@@ -26,8 +26,8 @@ public class CustomerController {
     }
 
     @GetMapping("/{idCustomer}")
-    public ResponseEntity<CustomerDTOResponse> getCustomerById(@PathVariable Long idCustomer) {
-        CustomerDTOResponse customer = customerService.getCustomerById(idCustomer);
+    public ResponseEntity<CustomerDTOResponse> getCustomerById(@PathVariable Long customerId) {
+        CustomerDTOResponse customer = customerService.getCustomerById(customerId);
         return ResponseEntity.status(200).body(customer);
     }
 
@@ -44,14 +44,14 @@ public class CustomerController {
     }
 
     @PatchMapping("/{idCustomer}")
-    public ResponseEntity<Void> updateCustomer(@PathVariable Long idCustomer, @NotNull @RequestBody CustomerDTORequest customer) {
-        customerService.updateCustomer(idCustomer, customer);
+    public ResponseEntity<Void> updateCustomer(@PathVariable Long customerId, @NotNull @RequestBody CustomerDTORequest customer) {
+        customerService.updateCustomer(customerId, customer);
         return ResponseEntity.status(204).build();
     }
 
     @DeleteMapping("/{idCustomer}")
-    public ResponseEntity<Void> deleteCustomer(@PathVariable Long idCustomer) {
-        customerService.deleteCustomer(idCustomer);
+    public ResponseEntity<Void> deleteCustomer(@PathVariable Long customerId) {
+        customerService.deleteCustomer(customerId);
         return ResponseEntity.status(204).build();
     }
 }

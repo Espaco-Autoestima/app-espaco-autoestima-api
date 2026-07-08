@@ -1,6 +1,6 @@
-package br.com.espacoautoestima.schedulling.application.mappers;
+package br.com.espacoautoestima.schedulling.application.mappers.procedure;
 
-import br.com.espacoautoestima.schedulling.application.adapters.dto.ProcedureDTOResponse;
+import br.com.espacoautoestima.schedulling.application.adapters.dto.procedure.ProcedureDTOResponse;
 import br.com.espacoautoestima.schedulling.application.model.entities.ProcedureEntity;
 import br.com.espacoautoestima.schedulling.core.domain.Procedure;
 import org.mapstruct.Mapper;

@@ -1,6 +1,6 @@
-package br.com.espacoautoestima.schedulling.application.mappers;
+package br.com.espacoautoestima.schedulling.application.mappers.customer;
 
-import br.com.espacoautoestima.schedulling.application.adapters.dto.CustomerDTOResponse;
+import br.com.espacoautoestima.schedulling.application.adapters.dto.customer.CustomerDTOResponse;
 import br.com.espacoautoestima.schedulling.application.model.entities.CustomerEntity;
 import br.com.espacoautoestima.schedulling.core.domain.Customer;
 import org.mapstruct.Mapper;

@@ -1,9 +1,9 @@
 package br.com.espacoautoestima.schedulling.application.services.customers;
 
-import br.com.espacoautoestima.schedulling.application.adapters.dto.CustomerDTORequest;
-import br.com.espacoautoestima.schedulling.application.adapters.dto.CustomerDTOResponse;
-import br.com.espacoautoestima.schedulling.application.mappers.CustomerRequestMapper;
-import br.com.espacoautoestima.schedulling.application.mappers.CustomerResponseMapper;
+import br.com.espacoautoestima.schedulling.application.adapters.dto.customer.CustomerDTORequest;
+import br.com.espacoautoestima.schedulling.application.adapters.dto.customer.CustomerDTOResponse;
+import br.com.espacoautoestima.schedulling.application.mappers.customer.CustomerRequestMapper;
+import br.com.espacoautoestima.schedulling.application.mappers.customer.CustomerResponseMapper;
 import br.com.espacoautoestima.schedulling.application.model.entities.CustomerEntity;
 import br.com.espacoautoestima.schedulling.application.infrastructure.repositories.CustomerRepository;
 import jakarta.transaction.Transactional;
@@ -31,9 +31,9 @@ public class CustomerService {
                 .toList();
     }
 
-    public CustomerDTOResponse getCustomerById(Long idCustomer) {
+    public CustomerDTOResponse getCustomerById(Long customerId) {
         CustomerEntity customerEntity = customerRepository
-                .findById(idCustomer)
+                .findById(customerId)
                 .orElseThrow(() -> new RuntimeException("Customer not found for search"));
         return customerResponseMapper.toDtoResponse(customerEntity);
     }
@@ -52,8 +52,8 @@ public class CustomerService {
     }
 
     @Transactional
-    public void updateCustomer(Long idCustomer, CustomerDTORequest customer) {
-        CustomerEntity existingCustomer = customerRepository.findById(idCustomer)
+    public void updateCustomer(Long customerId, CustomerDTORequest customer) {
+        CustomerEntity existingCustomer = customerRepository.findById(customerId)
                 .orElseThrow(() -> new RuntimeException("Customer not found for update"));
 
         customerRequestMapper.updateEntityFromDto(customer, existingCustomer);
@@ -62,9 +62,9 @@ public class CustomerService {
     }
 
     @Transactional
-    public void deleteCustomer(Long idCustomer) {
+    public void deleteCustomer(Long customerId) {
         CustomerEntity existingCustomer = customerRepository
-                .findById(idCustomer)
+                .findById(customerId)
                 .orElseThrow(() -> new RuntimeException("Customer not found for delete"));
         customerRepository.delete(existingCustomer);
     }

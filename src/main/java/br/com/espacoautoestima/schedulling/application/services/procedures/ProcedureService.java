@@ -1,10 +1,10 @@
 package br.com.espacoautoestima.schedulling.application.services.procedures;
 
-import br.com.espacoautoestima.schedulling.application.adapters.dto.ProcedureDTORequest;
-import br.com.espacoautoestima.schedulling.application.adapters.dto.ProcedureDTOResponse;
+import br.com.espacoautoestima.schedulling.application.adapters.dto.procedure.ProcedureDTORequest;
+import br.com.espacoautoestima.schedulling.application.adapters.dto.procedure.ProcedureDTOResponse;
 import br.com.espacoautoestima.schedulling.application.infrastructure.repositories.ProcedureRepository;
-import br.com.espacoautoestima.schedulling.application.mappers.ProcedureRequestMapper;
-import br.com.espacoautoestima.schedulling.application.mappers.ProcedureResponseMapper;
+import br.com.espacoautoestima.schedulling.application.mappers.procedure.ProcedureRequestMapper;
+import br.com.espacoautoestima.schedulling.application.mappers.procedure.ProcedureResponseMapper;
 import br.com.espacoautoestima.schedulling.application.model.entities.ProcedureEntity;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -31,9 +31,9 @@ public class ProcedureService {
                 .toList();
     }
 
-    public ProcedureDTOResponse getProcedureById(Long idProcedure) {
+    public ProcedureDTOResponse getProcedureById(Long procedureId) {
         ProcedureEntity procedureEntity = procedureRepository
-                .findById(idProcedure)
+                .findById(procedureId)
                 .orElseThrow(() -> new RuntimeException("Procedure not found for search"));
         return procedureResponseMapper.toDtoResponse(procedureEntity);
     }
@@ -52,8 +52,8 @@ public class ProcedureService {
     }
 
     @Transactional
-    public void updateProcedure(Long idProcedure, ProcedureDTORequest procedure) {
-        ProcedureEntity existingProcedure = procedureRepository.findById(idProcedure)
+    public void updateProcedure(Long procedureId, ProcedureDTORequest procedure) {
+        ProcedureEntity existingProcedure = procedureRepository.findById(procedureId)
                 .orElseThrow(() -> new RuntimeException("Procedure not found for update"));
 
         procedureRequestMapper.updateEntityFromDto(procedure, existingProcedure);
@@ -62,9 +62,9 @@ public class ProcedureService {
     }
 
     @Transactional
-    public void deleteProcedure(Long idProcedure) {
+    public void deleteProcedure(Long procedureId) {
         ProcedureEntity existingProcedure = procedureRepository
-                .findById(idProcedure)
+                .findById(procedureId)
                 .orElseThrow(() -> new RuntimeException("Procedure not found for delete"));
         procedureRepository.delete(existingProcedure);
     }

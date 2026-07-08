@@ -1,6 +1,6 @@
-package br.com.espacoautoestima.schedulling.application.mappers;
+package br.com.espacoautoestima.schedulling.application.mappers.procedure;
 
-import br.com.espacoautoestima.schedulling.application.adapters.dto.ProcedureDTORequest;
+import br.com.espacoautoestima.schedulling.application.adapters.dto.procedure.ProcedureDTORequest;
 import br.com.espacoautoestima.schedulling.application.model.entities.ProcedureEntity;
 import br.com.espacoautoestima.schedulling.core.domain.Procedure;
 import org.mapstruct.Mapper;
@@ -20,9 +20,9 @@ public interface ProcedureRequestMapper {
     @Mapping(target = "description", source = "procedureDTORequest.description")
     public abstract void updateEntityFromDto(ProcedureDTORequest procedureDTORequest, @MappingTarget ProcedureEntity procedureEntity);
 
-    @Mapping(target = "id", source = "id")
-    @Mapping(target = "name", source = "name")
-    @Mapping(target = "description", source = "description")
+    @Mapping(target = "id", source = "procedureEntity.id")
+    @Mapping(target = "name", source = "procedureEntity.name")
+    @Mapping(target = "description", source = "procedureEntity.description")
     public abstract Procedure toDomain(ProcedureEntity procedureEntity);
 
     @Mapping(target = "id", source = "id")

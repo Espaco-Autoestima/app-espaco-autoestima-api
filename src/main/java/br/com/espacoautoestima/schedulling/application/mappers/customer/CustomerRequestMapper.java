@@ -1,6 +1,6 @@
-package br.com.espacoautoestima.schedulling.application.mappers;
+package br.com.espacoautoestima.schedulling.application.mappers.customer;
 
-import br.com.espacoautoestima.schedulling.application.adapters.dto.CustomerDTORequest;
+import br.com.espacoautoestima.schedulling.application.adapters.dto.customer.CustomerDTORequest;
 import br.com.espacoautoestima.schedulling.application.model.entities.CustomerEntity;
 import br.com.espacoautoestima.schedulling.core.domain.Customer;
 import org.mapstruct.Mapper;
@@ -24,11 +24,11 @@ public interface CustomerRequestMapper {
     @Mapping(target = "cpf", source = "customerDTORequest.cpf")
     public abstract void updateEntityFromDto(CustomerDTORequest customerDTORequest, @MappingTarget CustomerEntity customerEntity);
 
-    @Mapping(target = "id", source = "id")
-    @Mapping(target = "name", source = "name")
-    @Mapping(target = "email", source = "email")
-    @Mapping(target = "phoneNumber", source = "phoneNumber")
-    @Mapping(target = "cpf", source = "cpf")
+    @Mapping(target = "id", source = "customerEntity.id")
+    @Mapping(target = "name", source = "customerEntity.name")
+    @Mapping(target = "email", source = "customerEntity.email")
+    @Mapping(target = "phoneNumber", source = "customerEntity.phoneNumber")
+    @Mapping(target = "cpf", source = "customerEntity.cpf")
     public abstract Customer toDomain(CustomerEntity customerEntity);
 
     @Mapping(target = "id", source = "id")

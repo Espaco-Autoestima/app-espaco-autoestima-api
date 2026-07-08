@@ -1,4 +1,4 @@
-package br.com.espacoautoestima.schedulling.application.adapters.dto;
+package br.com.espacoautoestima.schedulling.application.adapters.dto.customer;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

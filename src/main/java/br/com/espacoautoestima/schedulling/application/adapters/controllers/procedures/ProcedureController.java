@@ -1,7 +1,7 @@
 package br.com.espacoautoestima.schedulling.application.adapters.controllers.procedures;
 
-import br.com.espacoautoestima.schedulling.application.adapters.dto.ProcedureDTORequest;
-import br.com.espacoautoestima.schedulling.application.adapters.dto.ProcedureDTOResponse;
+import br.com.espacoautoestima.schedulling.application.adapters.dto.procedure.ProcedureDTORequest;
+import br.com.espacoautoestima.schedulling.application.adapters.dto.procedure.ProcedureDTOResponse;
 import br.com.espacoautoestima.schedulling.application.services.procedures.ProcedureService;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.http.ResponseEntity;
@@ -26,8 +26,8 @@ public class ProcedureController {
     }
 
     @GetMapping("/{idProcedure}")
-    public ResponseEntity<ProcedureDTOResponse> getProcedureById(@PathVariable Long idProcedure) {
-        ProcedureDTOResponse procedure = procedureService.getProcedureById(idProcedure);
+    public ResponseEntity<ProcedureDTOResponse> getProcedureById(@PathVariable Long procedureId) {
+        ProcedureDTOResponse procedure = procedureService.getProcedureById(procedureId);
         return ResponseEntity.status(200).body(procedure);
     }
 
@@ -44,14 +44,14 @@ public class ProcedureController {
     }
 
     @PatchMapping("/{idProcedure}")
-    public ResponseEntity<Void> updateProcedure(@PathVariable Long idProcedure, @NotNull @RequestBody ProcedureDTORequest procedure) {
-        procedureService.updateProcedure(idProcedure, procedure);
+    public ResponseEntity<Void> updateProcedure(@PathVariable Long procedureId, @NotNull @RequestBody ProcedureDTORequest procedure) {
+        procedureService.updateProcedure(procedureId, procedure);
         return ResponseEntity.status(204).build();
     }
 
     @DeleteMapping("/{idProcedure}")
-    public ResponseEntity<Void> deleteProcedure(@PathVariable Long idProcedure) {
-        procedureService.deleteProcedure(idProcedure);
+    public ResponseEntity<Void> deleteProcedure(@PathVariable Long procedureId) {
+        procedureService.deleteProcedure(procedureId);
         return ResponseEntity.status(204).build();
     }
 }
