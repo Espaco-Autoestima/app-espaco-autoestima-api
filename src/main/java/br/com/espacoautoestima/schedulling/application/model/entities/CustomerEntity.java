@@ -24,6 +24,6 @@ public class CustomerEntity {
     @Column(name = "phoneNumber", length = 25, nullable = false)
     private String phoneNumber;
 
-    @Column(name = "cpf", length = 14, nullable = false, updatable = false)
+    @Column(name = "cpf", length = 14, nullable = false)
     private String cpf;
 }
