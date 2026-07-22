@@ -55,7 +55,6 @@ public class ProcedureService {
     public void updateProcedure(Long procedureId, ProcedureDTORequest procedure) {
         ProcedureEntity existingProcedure = procedureRepository.findById(procedureId)
                 .orElseThrow(() -> new RuntimeException("Procedure not found for update"));
-
         procedureRequestMapper.updateEntityFromDto(procedure, existingProcedure);
         ProcedureEntity updatedProcedure = existingProcedure;
         procedureRepository.save(updatedProcedure);

@@ -55,7 +55,6 @@ public class CustomerService {
     public void updateCustomer(Long customerId, CustomerDTORequest customer) {
         CustomerEntity existingCustomer = customerRepository.findById(customerId)
                 .orElseThrow(() -> new RuntimeException("Customer not found for update"));
-
         customerRequestMapper.updateEntityFromDto(customer, existingCustomer);
         CustomerEntity updatedCustomer = existingCustomer;
         customerRepository.save(updatedCustomer);

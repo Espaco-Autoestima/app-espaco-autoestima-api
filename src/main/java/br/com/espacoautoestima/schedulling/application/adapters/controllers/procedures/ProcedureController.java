@@ -25,7 +25,7 @@ public class ProcedureController {
         return ResponseEntity.status(200).body(procedures);
     }
 
-    @GetMapping("/{idProcedure}")
+    @GetMapping("/{procedureId}")
     public ResponseEntity<ProcedureDTOResponse> getProcedureById(@PathVariable Long procedureId) {
         ProcedureDTOResponse procedure = procedureService.getProcedureById(procedureId);
         return ResponseEntity.status(200).body(procedure);
@@ -43,13 +43,13 @@ public class ProcedureController {
         return ResponseEntity.status(201).build();
     }
 
-    @PatchMapping("/{idProcedure}")
+    @PatchMapping("/{procedureId}")
     public ResponseEntity<Void> updateProcedure(@PathVariable Long procedureId, @NotNull @RequestBody ProcedureDTORequest procedure) {
         procedureService.updateProcedure(procedureId, procedure);
         return ResponseEntity.status(204).build();
     }
 
-    @DeleteMapping("/{idProcedure}")
+    @DeleteMapping("/{procedureId}")
     public ResponseEntity<Void> deleteProcedure(@PathVariable Long procedureId) {
         procedureService.deleteProcedure(procedureId);
         return ResponseEntity.status(204).build();

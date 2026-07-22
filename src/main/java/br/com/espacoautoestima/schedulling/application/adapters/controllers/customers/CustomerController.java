@@ -25,7 +25,7 @@ public class CustomerController {
         return ResponseEntity.status(200).body(customers);
     }
 
-    @GetMapping("/{idCustomer}")
+    @GetMapping("/{customerId}")
     public ResponseEntity<CustomerDTOResponse> getCustomerById(@PathVariable Long customerId) {
         CustomerDTOResponse customer = customerService.getCustomerById(customerId);
         return ResponseEntity.status(200).body(customer);
@@ -43,13 +43,13 @@ public class CustomerController {
         return ResponseEntity.status(201).build();
     }
 
-    @PatchMapping("/{idCustomer}")
+    @PatchMapping("/{customerId}")
     public ResponseEntity<Void> updateCustomer(@PathVariable Long customerId, @NotNull @RequestBody CustomerDTORequest customer) {
         customerService.updateCustomer(customerId, customer);
         return ResponseEntity.status(204).build();
     }
 
-    @DeleteMapping("/{idCustomer}")
+    @DeleteMapping("/{customerId}")
     public ResponseEntity<Void> deleteCustomer(@PathVariable Long customerId) {
         customerService.deleteCustomer(customerId);
         return ResponseEntity.status(204).build();

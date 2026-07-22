@@ -14,7 +14,6 @@ import org.springframework.validation.annotation.Validated;
 @NoArgsConstructor
 public class ProcedureDTORequest {
 
-    @JsonIgnore
     private Long id;
 
     @JsonProperty("name")

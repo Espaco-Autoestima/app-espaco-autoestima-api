@@ -1,37 +1,57 @@
 package br.com.espacoautoestima.schedulling.application.adapters.controllers.products;
 
+import br.com.espacoautoestima.schedulling.application.adapters.dto.product.ProductDTORequest;
+import br.com.espacoautoestima.schedulling.application.adapters.dto.product.ProductDTOResponse;
 import br.com.espacoautoestima.schedulling.application.services.products.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.validation.constraints.NotNull;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/v1/products")
 public class ProductController {
 
-    @Autowired
-    private ProductService productService;
+    private final ProductService productService;
 
-    // Use 200 status code for successful retrieval of resources
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
+
     @GetMapping
-    public String listProducts() {
-        return "List of products";
+    public ResponseEntity<List<ProductDTOResponse>> listProducts() {
+        List<ProductDTOResponse> products = productService.getAllProducts();
+        return ResponseEntity.status(200).body(products);
     }
 
-    // Use 201 status code for successful creation of a resource
+    @GetMapping("/{productId}")
+    public ResponseEntity<ProductDTOResponse> getProductById(@PathVariable Long productId) {
+        ProductDTOResponse product = productService.getProductById(productId);
+        return ResponseEntity.status(200).body(product);
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<ProductDTOResponse>> getProductByName(@RequestParam String name) {
+        List<ProductDTOResponse> products = productService.getProductByName(name);
+        return ResponseEntity.status(200).body(products);
+    }
+
     @PostMapping
-    public String createProduct() {
-        return "Product created";
+    public ResponseEntity<Void> createProduct(@NotNull @RequestBody ProductDTORequest productDTORequest) {
+        productService.createProduct(productDTORequest);
+        return ResponseEntity.status(201).build();
     }
 
-    // Use 204 status code for successful deletion of a resource
-    @PutMapping
-    public String updateProduct() {
-        return "Product updated";
+    @PatchMapping("/{productId}")
+    public ResponseEntity<Void> updateProduct(@PathVariable Long productId, @NotNull @RequestBody ProductDTORequest productDTORequest) {
+        productService.updateProduct(productId, productDTORequest);
+        return ResponseEntity.status(204).build();
     }
 
-    // Use 204 status code for successful deletion of a resource
-    @DeleteMapping
-    public String deleteProduct() {
-        return "Product deleted";
+    @DeleteMapping("/{productId}")
+    public ResponseEntity<Void> deleteProduct(@PathVariable Long productId) {
+        productService.deleteProduct(productId);
+        return ResponseEntity.status(204).build();
     }
 }
