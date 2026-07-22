@@ -31,8 +31,8 @@ public class ProductService {
                 .toList();
     }
 
-    public ProductDTOResponse getProductById(Long idProduct) {
-        ProductEntity productEntity = productRepository.findById(idProduct)
+    public ProductDTOResponse getProductById(Long productId) {
+        ProductEntity productEntity = productRepository.findById(productId)
                 .orElseThrow(() -> new RuntimeException("Product not found for search"));
         return productResponseMapper.toDtoResponse(productEntity);
     }
@@ -50,4 +50,20 @@ public class ProductService {
         productRepository.save(newProduct);
     }
 
+    @Transactional
+    public void updateProduct(Long productId, ProductDTORequest product) {
+        ProductEntity existingProduct = productRepository.findById(productId)
+                .orElseThrow(() -> new RuntimeException("Product not found for update"));
+        productRequestMapper.updateEntityFromDto(product, existingProduct);
+        ProductEntity updatedProduct = existingProduct;
+        productRepository.save(updatedProduct);
+    }
+
+    @Transactional
+    public void deleteProduct(Long productId) {
+        ProductEntity existingProduct = productRepository
+                .findById(productId)
+                .orElseThrow(() -> new RuntimeException("Product not found for delete"));
+        productRepository.delete(existingProduct);
+    }
 }

@@ -1,6 +1,5 @@
 package br.com.espacoautoestima.schedulling.application.adapters.dto.product;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -8,7 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Validated
 @Data
@@ -16,7 +15,6 @@ import java.util.Date;
 @NoArgsConstructor
 public class ProductDTORequest {
 
-    @JsonIgnore
     private Long id;
 
     @JsonProperty("name")
@@ -29,7 +27,7 @@ public class ProductDTORequest {
 
     @JsonProperty("expiration_date")
     @NotBlank(message = "Field expirationDate is required")
-    private Date expirationDate;
+    private LocalDate expirationDate;
 
     @JsonProperty("quantity")
     @NotBlank(message = "Field quantity is required")

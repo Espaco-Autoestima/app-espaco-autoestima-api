@@ -3,7 +3,7 @@ package br.com.espacoautoestima.schedulling.application.model.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 @Entity
@@ -21,8 +21,8 @@ public class ProductEntity {
     @Column(name = "description", length = 100, nullable = false)
     private String description;
 
-    @Column(name = "expirationDate", nullable = false, updatable = false)
-    private Date expirationDate;
+    @Column(name = "expirationDate", nullable = false)
+    private LocalDate expirationDate;
 
     @Column(name = "quantity", nullable = false)
     private Integer quantity;

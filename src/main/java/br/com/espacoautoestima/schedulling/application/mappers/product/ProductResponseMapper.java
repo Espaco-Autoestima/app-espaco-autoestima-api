@@ -9,7 +9,7 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface ProductResponseMapper {
 
-    @Mapping(target = "id", source = "productDTOResponse.id")
+    @Mapping(target = "id", ignore = true)
     @Mapping(target = "name", source = "productDTOResponse.name")
     @Mapping(target = "description", source = "productDTOResponse.description")
     @Mapping(target = "expirationDate", source = "productDTOResponse.expirationDate")
@@ -18,7 +18,7 @@ public interface ProductResponseMapper {
     @Mapping(target = "price", source = "productDTOResponse.price")
     public abstract ProductEntity toEntity(ProductDTOResponse productDTOResponse);
 
-    @Mapping(target = "id", source = "productEntity.id")
+    @Mapping(target = "id", ignore = true)
     @Mapping(target = "name", source = "productEntity.name")
     @Mapping(target = "description", source = "productEntity.description")
     @Mapping(target = "expirationDate", source = "productEntity.expirationDate")

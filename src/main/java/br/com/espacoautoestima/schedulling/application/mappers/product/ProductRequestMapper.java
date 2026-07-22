@@ -19,7 +19,7 @@ public interface ProductRequestMapper {
     @Mapping(target = "price", source = "productDTORequest.price")
     public abstract ProductEntity saveEntityFromDto(ProductDTORequest productDTORequest);
 
-    @Mapping(target = "id", source = "productDTORequest.id")
+    @Mapping(target = "id", ignore = true)
     @Mapping(target = "name", source = "productDTORequest.name")
     @Mapping(target = "description", source = "productDTORequest.description")
     @Mapping(target = "expirationDate", source = "productDTORequest.expirationDate")
