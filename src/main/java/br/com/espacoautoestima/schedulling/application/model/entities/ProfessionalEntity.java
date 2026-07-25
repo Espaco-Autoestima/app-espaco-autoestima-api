@@ -23,5 +23,5 @@ public class ProfessionalEntity {
     private String email;
 
     @Column(name = "speciality", length = 20, nullable = false)
-    private String specialty;
+    private String speciality;
 }

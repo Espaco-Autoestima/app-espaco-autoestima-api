@@ -1,37 +1,57 @@
 package br.com.espacoautoestima.schedulling.application.adapters.controllers.professionals;
 
+import br.com.espacoautoestima.schedulling.application.adapters.dto.professional.ProfessionalDTORequest;
+import br.com.espacoautoestima.schedulling.application.adapters.dto.professional.ProfessionalDTOResponse;
 import br.com.espacoautoestima.schedulling.application.services.professionals.ProfessionalService;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.validation.constraints.NotNull;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/v1/professionals")
 public class ProfessionalController {
 
-    @Autowired
     private ProfessionalService professionalService;
 
-    // Use 200 status code for successful retrieval of resources
+    public ProfessionalController(ProfessionalService professionalService) {
+        this.professionalService = professionalService;
+    }
+
     @GetMapping
-    public String listProfessionals() {
-        return "List of professionals";
+    public ResponseEntity<List<ProfessionalDTOResponse>> listProfessionals() {
+        List<ProfessionalDTOResponse> professionals = professionalService.getAllProfessionals();
+        return ResponseEntity.status(200).body(professionals);
     }
 
-    // Use 201 status code for successful creation of a resource
+    @GetMapping("/{professionalId}")
+    public ResponseEntity<ProfessionalDTOResponse> getProfessionalById(@PathVariable Long professionalId) {
+        ProfessionalDTOResponse professional = professionalService.getProfessionalById(professionalId);
+        return ResponseEntity.status(200).body(professional);
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<ProfessionalDTOResponse>> getProfessionalByName(@RequestParam String name) {
+        List<ProfessionalDTOResponse> professionals = professionalService.getProfessionalByName(name);
+        return ResponseEntity.status(200).body(professionals);
+    }
+
     @PostMapping
-    public String createProfessional() {
-        return "Professional created";
+    public ResponseEntity<Void> createProfessional(@NotNull @RequestBody ProfessionalDTORequest professionalDTORequest) {
+        professionalService.createProfessional(professionalDTORequest);
+        return ResponseEntity.status(201).build();
     }
 
-    // Use 204 status code for successful deletion of a resource
-    @PutMapping
-    public String updateProfessional() {
-        return "Professional updated";
+    @PatchMapping("/{professionalId}")
+    public ResponseEntity<Void> updateProfessional(@PathVariable Long professionalId, @NotNull @RequestBody ProfessionalDTORequest professionalDTORequest) {
+        professionalService.updateProfessional(professionalId, professionalDTORequest);
+        return ResponseEntity.status(200).build();
     }
 
-    // Use 204 status code for successful deletion of a resource
-    @DeleteMapping
-    public String deleteProfessional() {
-        return "Professional deleted";
+    @DeleteMapping("/{professionalId}")
+    public ResponseEntity<Void> deleteProfessional(@PathVariable Long professionalId) {
+        professionalService.deleteProfessional(professionalId);
+        return ResponseEntity.status(200).build();
     }
 }
