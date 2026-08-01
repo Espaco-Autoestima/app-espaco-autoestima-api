@@ -2,8 +2,8 @@ package br.com.espacoautoestima.schedulling.application.services.customers;
 
 import br.com.espacoautoestima.schedulling.application.adapters.dto.customer.CustomerDTORequest;
 import br.com.espacoautoestima.schedulling.application.adapters.dto.customer.CustomerDTOResponse;
-import br.com.espacoautoestima.schedulling.application.mappers.customer.CustomerRequestMapper;
-import br.com.espacoautoestima.schedulling.application.mappers.customer.CustomerResponseMapper;
+import br.com.espacoautoestima.schedulling.application.mappers.customers.CustomerRequestMapper;
+import br.com.espacoautoestima.schedulling.application.mappers.customers.CustomerResponseMapper;
 import br.com.espacoautoestima.schedulling.application.model.entities.CustomerEntity;
 import br.com.espacoautoestima.schedulling.application.infrastructure.repositories.CustomerRepository;
 import jakarta.transaction.Transactional;

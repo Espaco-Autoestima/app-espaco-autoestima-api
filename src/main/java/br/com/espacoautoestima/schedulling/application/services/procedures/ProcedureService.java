@@ -3,10 +3,9 @@ package br.com.espacoautoestima.schedulling.application.services.procedures;
 import br.com.espacoautoestima.schedulling.application.adapters.dto.procedure.ProcedureDTORequest;
 import br.com.espacoautoestima.schedulling.application.adapters.dto.procedure.ProcedureDTOResponse;
 import br.com.espacoautoestima.schedulling.application.infrastructure.repositories.ProcedureRepository;
-import br.com.espacoautoestima.schedulling.application.mappers.procedure.ProcedureRequestMapper;
-import br.com.espacoautoestima.schedulling.application.mappers.procedure.ProcedureResponseMapper;
+import br.com.espacoautoestima.schedulling.application.mappers.procedures.ProcedureRequestMapper;
+import br.com.espacoautoestima.schedulling.application.mappers.procedures.ProcedureResponseMapper;
 import br.com.espacoautoestima.schedulling.application.model.entities.ProcedureEntity;
-import br.com.espacoautoestima.schedulling.application.services.customers.CustomerService;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 

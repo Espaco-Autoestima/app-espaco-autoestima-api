@@ -3,10 +3,9 @@ package br.com.espacoautoestima.schedulling.application.services.products;
 import br.com.espacoautoestima.schedulling.application.adapters.dto.product.ProductDTORequest;
 import br.com.espacoautoestima.schedulling.application.adapters.dto.product.ProductDTOResponse;
 import br.com.espacoautoestima.schedulling.application.infrastructure.repositories.ProductRepository;
-import br.com.espacoautoestima.schedulling.application.mappers.product.ProductRequestMapper;
-import br.com.espacoautoestima.schedulling.application.mappers.product.ProductResponseMapper;
+import br.com.espacoautoestima.schedulling.application.mappers.products.ProductRequestMapper;
+import br.com.espacoautoestima.schedulling.application.mappers.products.ProductResponseMapper;
 import br.com.espacoautoestima.schedulling.application.model.entities.ProductEntity;
-import br.com.espacoautoestima.schedulling.application.services.procedures.ProcedureService;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -71,8 +70,7 @@ public class ProductService {
     @Transactional
     public void deleteProduct(Long productId) {
         logger.info("Deleting product:");
-        ProductEntity existingProduct = productRepository
-                .findById(productId)
+        ProductEntity existingProduct = productRepository.findById(productId)
                 .orElseThrow(() -> new RuntimeException("Product not found for delete"));
         productRepository.delete(existingProduct);
     }

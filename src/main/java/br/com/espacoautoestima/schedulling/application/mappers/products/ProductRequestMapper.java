@@ -1,4 +1,4 @@
-package br.com.espacoautoestima.schedulling.application.mappers.product;
+package br.com.espacoautoestima.schedulling.application.mappers.products;
 
 import br.com.espacoautoestima.schedulling.application.adapters.dto.product.ProductDTORequest;
 import br.com.espacoautoestima.schedulling.application.model.entities.ProductEntity;

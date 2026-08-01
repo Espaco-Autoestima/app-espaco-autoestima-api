@@ -1,4 +1,4 @@
-package br.com.espacoautoestima.schedulling.application.mappers.procedure;
+package br.com.espacoautoestima.schedulling.application.mappers.procedures;
 
 import br.com.espacoautoestima.schedulling.application.adapters.dto.procedure.ProcedureDTORequest;
 import br.com.espacoautoestima.schedulling.application.model.entities.ProcedureEntity;
