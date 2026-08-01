@@ -17,7 +17,7 @@ public interface SupplierRequestMapper {
     @Mapping(target = "companyName", source = "supplierDTORequest.companyName")
     public abstract SupplierEntity saveEntityFromDto(SupplierDTORequest supplierDTORequest);
 
-    @Mapping(target = "id", source = "supplierDTORequest.id")
+    @Mapping(target = "id", ignore = true)
     @Mapping(target = "name", source = "supplierDTORequest.name")
     @Mapping(target = "email", source = "supplierDTORequest.email")
     @Mapping(target = "phoneNumber", source = "supplierDTORequest.phoneNumber")

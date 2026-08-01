@@ -1,37 +1,57 @@
 package br.com.espacoautoestima.schedulling.application.adapters.controllers.suppliers;
 
+import br.com.espacoautoestima.schedulling.application.adapters.dto.supplier.SupplierDTORequest;
+import br.com.espacoautoestima.schedulling.application.adapters.dto.supplier.SupplierDTOResponse;
 import br.com.espacoautoestima.schedulling.application.services.suppliers.SupplierService;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.validation.constraints.NotNull;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/v1/suppliers")
 public class SupplierController {
 
-    @Autowired
     private SupplierService supplierService;
 
-    // Use 200 status code for successful retrieval of resources
+    public SupplierController(SupplierService supplierService) {
+        this.supplierService = supplierService;
+    }
+
     @GetMapping
-    public String listSuppliers() {
-        return "List of suppliers";
+    public ResponseEntity<List<SupplierDTOResponse>> listSuppliers() {
+        List<SupplierDTOResponse> suppliers = supplierService.getAllSuppliers();
+        return ResponseEntity.status(200).body(suppliers);
     }
 
-    // Use 201 status code for successful creation of a resource
+    @GetMapping("/{supplierId}")
+    public ResponseEntity<SupplierDTOResponse> getSupplierById(@PathVariable Long supplierId) {
+        SupplierDTOResponse supplier = supplierService.getSupplierById(supplierId);
+        return ResponseEntity.status(200).body(supplier);
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<SupplierDTOResponse>> getSupplierByName(@RequestParam String name) {
+        List<SupplierDTOResponse> suppliers = supplierService.getSupplierByName(name);
+        return ResponseEntity.status(200).body(suppliers);
+    }
+
     @PostMapping
-    public String createSupplier() {
-        return "Supplier created";
+    public ResponseEntity<Void> createSupplier(@NotNull @RequestBody SupplierDTORequest supplierDTORequest) {
+        supplierService.createSupplier(supplierDTORequest);
+        return ResponseEntity.status(200).build();
     }
 
-    // Use 204 status code for successful deletion of a resource
-    @PutMapping
-    public String updateSupplier() {
-        return "Supplier updated";
+    @PatchMapping("/{supplierId}")
+    public ResponseEntity<Void> updateSupplier(@PathVariable Long supplierId, @NotNull @RequestBody SupplierDTORequest supplierDTORequest) {
+        supplierService.updateSupplier(supplierId, supplierDTORequest);
+        return ResponseEntity.status(200).build();
     }
 
-    // Use 204 status code for successful deletion of a resource
-    @DeleteMapping
-    public String deleteSupplier() {
-        return "Supplier deleted";
+    @DeleteMapping("/{supplierId}")
+    public ResponseEntity<Void> deleteSupplier(@PathVariable Long supplierId) {
+        supplierService.deleteSupplier(supplierId);
+        return ResponseEntity.status(200).build();
     }
 }

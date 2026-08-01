@@ -67,6 +67,7 @@ public class SupplierService {
         supplierRepository.save(updatedSupplier);
     }
 
+    @Transactional
     public void deleteSupplier(Long supplierId) {
         logger.info("Deleting supplier:");
         SupplierEntity existingSupplier = supplierRepository.findById(supplierId)

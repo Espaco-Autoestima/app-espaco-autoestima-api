@@ -23,11 +23,11 @@ public class SupplierDTORequest {
     @NotBlank(message = "Field email is required")
     private String email;
 
-    @JsonProperty("phoneNumber")
+    @JsonProperty("phone_number")
     @NotBlank(message = "Field phoneNumber is required")
     private String phoneNumber;
 
-    @JsonProperty("companyName")
+    @JsonProperty("company_name")
     @NotBlank(message = "Field companyName is required")
     private String companyName;
 }
